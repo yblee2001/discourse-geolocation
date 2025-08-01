@@ -1,0 +1,6 @@
+plugins:
+  geolocation_enabled:
+    default: true
+    client: true
+    type: bool
+    description: "Enable or disable geolocation feature"

@@ -1,0 +1,6 @@
+<div>
+  <input type="text" value={{keyword}} placeholder="키워드를 입력해주세요." oninput={{action (mut keyword) value="target.value"}}>
+  <button id="my-button" {{action "onSubmitNote" on="click"}}>키워드 입력</button>
+
+  <button id="my-button" {{action "getLocation" on="click"}}>위치 테스트</button>
+</div>

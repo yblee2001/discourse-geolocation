@@ -13,11 +13,6 @@ export default Component.extend({
     )
   },
 
-  handleClick() {
-    // console.log('hello...')
-    // alert("커스텀 컴포넌트 버튼 클릭!");
-  },
-
   actions: {
     handleClick(event) {
       console.log('hello world')

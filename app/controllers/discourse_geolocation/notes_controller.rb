@@ -8,7 +8,7 @@ module DiscourseGeolocation
         content: params[:content],
         longitude: params[:longitude],
         latitude: params[:latitude],
-        user: params[:user],
+        user_id: params[:user_id],
       )
 
       if note.save

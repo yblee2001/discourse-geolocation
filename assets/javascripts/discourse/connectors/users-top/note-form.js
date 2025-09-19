@@ -9,7 +9,13 @@ export default Component.extend({
   keyword: "",
   latitude: "",
   longitude: "",
+  user_id: "",
 
+  init() {
+    this._super(...arguments);
+    const currentUser = getOwner(this).lookup("service:current-user");
+    this.set("user_id", currentUser?.id || null);
+  },
 
   actions: {
     onSubmitNote() {
@@ -25,10 +31,12 @@ export default Component.extend({
     },
   },
 
+  //deprecated
   getUser() {
     const currentUser = getOwner(this).lookup('service:current-user');
     console.log(currentUser.id, currentUser.username);
-    return currentUser.id
+    this.set("user_id", currentUser.id || null);
+    return this.user_id;
   },
 
   getLocation() {
@@ -64,7 +72,7 @@ export default Component.extend({
         content: this.keyword,
         longitude,
         latitude,
-        user: this.getUser(),
+        user_id: this.user_id,
       }
     }).then(() => {
       alert("키워드가 저장었습니다!");

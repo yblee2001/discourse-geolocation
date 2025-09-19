@@ -167,6 +167,7 @@ group :development do
   gem "binding_of_caller"
   gem "yaml-lint"
   gem "yard"
+  gem "rack-cors"
 end
 
 if ENV["ALLOW_DEV_POPULATE"] == "1"

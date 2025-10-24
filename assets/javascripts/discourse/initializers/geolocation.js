@@ -72,9 +72,40 @@ function initializeGeolocation(api) {
 export default {
   name: "geolocation",
   initialize() {
-    // withPluginApi("0.8", (api) => {
-    //   initializeGeolocation(api);
-    // });
+    withPluginApi("0.8", (api) => {
+      // Get saved font size or use default
+      let currentSize = localStorage.getItem("font-size") || "16px";
+      document.documentElement.style.fontSize = currentSize;
+
+      // Add a menu option (toolbar or header action)
+      api.addToolbarPopupMenuOptionsCallback(() => {
+        return {
+          action: "changeFontSize",
+          icon: "text-height",
+          label: "Change Font Size",
+        };
+      });
+
+      // Define the action
+      api.modifyClass("controller:application", {
+        pluginId: "my-awesome-plugin",
+
+        actions: {
+          changeFontSize() {
+            const newSize = prompt(
+              "Enter font size (e.g., 14px, 18px):",
+              currentSize
+            );
+            if (newSize) {
+              document.documentElement.style.fontSize = newSize;
+              localStorage.setItem("font-size", newSize);
+              currentSize = newSize;
+            }
+          },
+        },
+      });
+
+    });
   },
 
   // initialize() {

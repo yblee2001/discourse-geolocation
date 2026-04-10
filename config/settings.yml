@@ -4,3 +4,63 @@ plugins:
     client: true
     type: bool
     description: "Enable or disable geolocation feature"
+
+  # Facebook Login
+  facebook_login_enabled:
+    default: false
+    type: bool
+    description: "Enable Facebook login"
+  facebook_app_id:
+    default: ""
+    type: string
+    description: "Facebook App ID"
+  facebook_app_secret:
+    default: ""
+    type: string
+    secret: true
+    description: "Facebook App Secret"
+
+  # Google Login
+  google_login_enabled:
+    default: false
+    type: bool
+    description: "Enable Google login"
+  google_client_id:
+    default: ""
+    type: string
+    description: "Google OAuth2 Client ID"
+  google_client_secret:
+    default: ""
+    type: string
+    secret: true
+    description: "Google OAuth2 Client Secret"
+
+  # Kakao Login
+  kakao_login_enabled:
+    default: false
+    type: bool
+    description: "Enable Kakao login"
+  kakao_client_id:
+    default: ""
+    type: string
+    description: "Kakao REST API Key"
+  kakao_client_secret:
+    default: ""
+    type: string
+    secret: true
+    description: "Kakao Client Secret"
+
+  # Naver Login
+  naver_login_enabled:
+    default: false
+    type: bool
+    description: "Enable Naver login"
+  naver_client_id:
+    default: ""
+    type: string
+    description: "Naver Client ID"
+  naver_client_secret:
+    default: ""
+    type: string
+    secret: true
+    description: "Naver Client Secret"

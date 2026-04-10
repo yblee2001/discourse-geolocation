@@ -10,11 +10,17 @@ export default Component.extend({
   latitude: "",
   longitude: "",
   user_id: "",
+  nearbyUsers: null,
 
   init() {
     this._super(...arguments);
     const currentUser = getOwner(this).lookup("service:current-user");
     this.set("user_id", currentUser?.id || null);
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.loadNearbyUsers();
   },
 
   actions: {
@@ -64,11 +70,11 @@ export default Component.extend({
     });
   },
 
-  saveNoteWithLocation(longitude, latitude) {
+  saveNoteWithLocation(latitude, longitude) {
     ajax("/notes", {
       type: "POST",
       data: {
-        title: 'TITLE',
+        title: this.title,
         content: this.keyword,
         longitude,
         latitude,
@@ -85,7 +91,24 @@ export default Component.extend({
   resetForm() {
     this.set("title", "");
     this.set("content", "");
-    this.set("keyword", "")
+    this.set("keyword", "");
+  },
+
+  loadNearbyUsers() {
+    this.getLocation()
+      .then(({ latitude, longitude }) => {
+        return ajax("/nearby_users", {
+          type: "GET",
+          data: { latitude, longitude, radius: 10 },
+        });
+      })
+      .then((response) => {
+        this.set("nearbyUsers", response.nearby_users);
+      })
+      .catch((error) => {
+        console.error("Error loading nearby users:", error.message || error);
+        this.set("nearbyUsers", []);
+      });
   },
 
 });

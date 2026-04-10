@@ -1,6 +1,31 @@
 <div>
+  <input type="text" value={{title}} placeholder="제목을 입력해주세요." oninput={{action (mut title) value="target.value"}}>
   <input type="text" value={{keyword}} placeholder="키워드를 입력해주세요." oninput={{action (mut keyword) value="target.value"}}>
   <button id="my-button" {{action "onSubmitNote" on="click"}}>키워드 입력</button>
 
   <button id="my-button" {{action "getLocation" on="click"}}>위치 테스트</button>
+</div>
+
+<div class="nearby-users-section">
+  <h3>근처 사용자</h3>
+  {{#if nearbyUsers}}
+    {{#each nearbyUsers as |nearbyUser|}}
+      <div class="nearby-user-card">
+        <strong>{{nearbyUser.username}}</strong>
+        {{#if nearbyUser.keywords.length}}
+          <ul>
+            {{#each nearbyUser.keywords as |kw|}}
+              <li>{{kw}}</li>
+            {{/each}}
+          </ul>
+        {{else}}
+          <span class="no-keywords">키워드 없음</span>
+        {{/if}}
+      </div>
+    {{/each}}
+  {{else if nearbyUsers}}
+    <p>근처에 사용자가 없습니다.</p>
+  {{else}}
+    <p>근처 사용자를 불러오는 중...</p>
+  {{/if}}
 </div>

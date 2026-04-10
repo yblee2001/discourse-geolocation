@@ -106,6 +106,8 @@ export default {
       });
 
     });
+
+    initializeGeolocation(api);
   },
 
   // initialize() {
